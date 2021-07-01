@@ -1,0 +1,56 @@
+{
+  "name": "blockchain-game",
+  "version": "0.1.0",
+  "description": "Blockchain memory game",
+  "author": "gregory@dappuniversity.com",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.1.0",
+    "bootstrap": "5.0.2",
+    "chai": "4.3.4",
+    "chai-as-promised": "7.1.1",
+    "chai-bignumber": "3.0.0",
+    "react": "17.0.2",
+    "react-bootstrap": "1.6.1",
+    "react-dom": "17.0.2",
+    "react-scripts": "4.0.3",
+    "truffle": "5.3.11",
+    "truffle-flattener": "^1.5.0",
+    "web3": "1.3.6"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-config-wesbos": "lukemcdonald/eslint-config-wesbos",
+    "eslint-plugin-html": "^6.1.2",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "^2.3.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "wesbos"
+    ],
+    "rules": {
+      "react/jsx-props-no-spreading": "off",
+      "react/prop-types": 0
+    }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
+}
