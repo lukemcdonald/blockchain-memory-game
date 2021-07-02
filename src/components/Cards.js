@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react'
 
+import { useBlockchain } from '../context/Blockchain'
+import { useToken, actionTypes as tokenActionTypes } from '../context/Token'
+
 const CARDS_ARRAY = [
 	'fries',
 	'cheeseburger',
@@ -10,6 +13,8 @@ const CARDS_ARRAY = [
 ]
 
 const Cards = () => {
+	const token = useToken()
+
 	const [cards, setCards] = useState([])
 	const [cardsChosen, setCardsChosen] = useState([])
 	const [cardsChosenId, setCardsChosenId] = useState([])
@@ -48,8 +53,15 @@ const Cards = () => {
 			alert('You have clicked on the same image.')
 		} else if (cardsChosen[0] === cardsChosen[1]) {
 			alert(`You have found a match!`)
+
+			const cardImg = cards[first].src.toString()
+
 			setCardsWon((prevState) => [...prevState, first, second])
-			// setTokenURIs: [prevState => cards[first].src]
+
+			token.dispatch({
+				type: tokenActionTypes.setTokenURIs,
+				value: cardImg,
+			})
 		} else if (isSelectLimit) {
 			alert('Sorry, try again.')
 		}
