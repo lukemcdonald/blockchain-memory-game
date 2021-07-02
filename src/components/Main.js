@@ -1,19 +1,36 @@
 import React from 'react'
-import { TokenProvider } from '../context/Token'
+import { useToken } from '../context/Token'
+
 import Cards from './Cards'
+import TokenCollection from './TokenCollection'
 
-const Main = () => (
-	<main role="main" className="col-lg-12 d-flex text-center">
-		<div className="content mx-auto">
-			<h1 className="mt-4">Blockchain Memory Game</h1>
+const Main = () => {
+	const {
+		state: { tokenURIs },
+	} = useToken()
 
-			<div className="grid mt-4 mx-auto">
-				<TokenProvider>
-					<Cards />
-				</TokenProvider>
+	return (
+		<main role="main" className="col-lg-12 d-flex text-center">
+			<div className="content mx-auto">
+				<h1 className="mt-4">Blockchain Memory Game</h1>
+
+				<div className="mt-4">
+					<p>Start matching images by clicking on a square.</p>
+					<div className="grid mt-4 mx-auto">
+						<Cards />
+					</div>
+				</div>
+
+				<div className="mt-4">
+					<h2>Tokens Collected: {tokenURIs.length}</h2>
+
+					<div className="grid mt-4 mx-auto">
+						<TokenCollection tokenURIs={tokenURIs} />
+					</div>
+				</div>
 			</div>
-		</div>
-	</main>
-)
+		</main>
+	)
+}
 
 export default Main

@@ -31,7 +31,9 @@ function tokenReducer(state, action) {
 
 function TokenProvider({ children }) {
 	const [state, dispatch] = useReducer(tokenReducer, initialState)
-	const { account, token, web3 } = useBlockchain()
+	const {
+		state: { account, token, web3 },
+	} = useBlockchain()
 
 	useEffect(() => {
 		const init = async () => {

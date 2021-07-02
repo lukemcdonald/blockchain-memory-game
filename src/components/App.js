@@ -1,6 +1,7 @@
 import React from 'react'
 
 import { BlockchainProvider } from '../context/Blockchain'
+import { TokenProvider } from '../context/Token'
 
 import Navbar from './Navbar.js'
 import Main from './Main.js'
@@ -11,7 +12,9 @@ const App = () => (
 
 		<div className="container-fluid mt-5">
 			<div className="row">
-				<Main />
+				<TokenProvider>
+					<Main />
+				</TokenProvider>
 			</div>
 		</div>
 	</BlockchainProvider>
