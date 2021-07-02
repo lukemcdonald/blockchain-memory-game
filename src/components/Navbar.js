@@ -1,9 +1,8 @@
-import React, { useContext } from 'react'
-import BlockchainContext from '../context/Blockchain'
+import React from 'react'
+import { useBlockchain } from '../context/Blockchain'
 
 const Navbar = () => {
-	const blockchainContext = useContext(BlockchainContext)
-	const { account } = blockchainContext
+	const { account } = useBlockchain()
 
 	return (
 		<nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
