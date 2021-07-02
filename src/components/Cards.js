@@ -13,6 +13,7 @@ const CARDS_ARRAY = [
 ]
 
 const Cards = () => {
+	const blockchain = useBlockchain()
 	const token = useToken()
 
 	const [cards, setCards] = useState([])
@@ -56,12 +57,17 @@ const Cards = () => {
 
 			const cardImg = cards[first].src.toString()
 
-			setCardsWon((prevState) => [...prevState, first, second])
+			blockchain.state.token.methods
+				.mint(blockchain.state.account, window.location.origin + cardImg)
+				.send({ from: blockchain.state.account })
+				.on('transactionHash', (hash) => {
+					setCardsWon((prevState) => [...prevState, first, second])
 
-			token.dispatch({
-				type: tokenActionTypes.setTokenURIs,
-				value: cardImg,
-			})
+					token.dispatch({
+						type: tokenActionTypes.setTokenURIs,
+						value: cardImg,
+					})
+				})
 		} else if (isSelectLimit) {
 			alert('Sorry, try again.')
 		}
