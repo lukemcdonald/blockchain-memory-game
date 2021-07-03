@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import { useBlockchain } from '../context/Blockchain'
 import { useToken, actionTypes as tokenActionTypes } from '../context/Token'
 
-const CARDS_ARRAY = [
+const CARD_NAMES = [
 	'fries',
 	'cheeseburger',
 	'ice-cream',
@@ -45,6 +45,18 @@ const Cards = () => {
 		setCardsChosenId([])
 	}
 
+	const randomizeCards = (_cards) =>
+		_cards.concat(_cards).sort(() => 0.5 - Math.random())
+
+	const loadCards = () => {
+		const data = CARD_NAMES.map((name) => ({
+			name,
+			src: `/images/${name}.png`,
+		}))
+
+		setCards(randomizeCards(data))
+	}
+
 	const checkForMatch = async () => {
 		const [first, second] = cardsChosenId
 		const isSelectLimit = cardsChosen.length >= 2
@@ -83,17 +95,9 @@ const Cards = () => {
 
 			setCardsWon([])
 			setScore(0)
+			loadCards()
 		}
 	}
-
-	useEffect(() => {
-		const isChosen = cardsChosen.length >= 2
-
-		if (isChosen) {
-			setScore((prevScore) => prevScore + 1)
-			setTimeout(checkForMatch, 100)
-		}
-	}, [cardsChosen])
 
 	const handleOnClickCard = (event) => {
 		const cardId = event.target.getAttribute('data-id')
@@ -103,18 +107,18 @@ const Cards = () => {
 		}
 	}
 
-	const loadCardData = () => {
-		const data = CARDS_ARRAY.map((name) => ({
-			name,
-			src: `/images/${name}.png`,
-		}))
-
-		setCards(data.concat(data).sort(() => 0.5 - Math.random()))
-	}
+	useEffect(() => {
+		loadCards()
+	}, [])
 
 	useEffect(() => {
-		loadCardData()
-	}, [])
+		const isChosen = cardsChosen.length >= 2
+
+		if (isChosen) {
+			setScore((prevScore) => prevScore + 1)
+			setTimeout(checkForMatch, 100)
+		}
+	}, [cardsChosen])
 
 	return cards.map((card, index) => (
 		<button
